@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="fullNameEditText" type="id" />
+    <item name="bioEditText" type="id" />
+    <item name="locationEditText" type="id" />
+    <item name="profileImageView" type="id" />
+    <item name="saveButton" type="id" />
+</resources>
