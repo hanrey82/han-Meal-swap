@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange_200"
     tools:context=".SearchActivity">
 
     <EditText
@@ -20,7 +21,7 @@
         android:hint="Search recipe"
         android:inputType="textFilter"
         android:paddingStart="47dp"
-        android:textColorHint="#5A5858"
+        android:textColorHint="@color/gray_500"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,87 +1,69 @@
 package com.tiodev.MealSwap;
-
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.airbnb.lottie.LottieAnimationView;
 import com.tiodev.MealSwap.Adapter.AdapterPopular;
-import com.tiodev.MealSwap.Model.ResModel;
 import com.tiodev.MealSwap.RoomDB.AppDatabase;
 import com.tiodev.MealSwap.RoomDB.User;
 import com.tiodev.MealSwap.RoomDB.UserDao;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class HomeActivity extends AppCompatActivity {
 
     ImageView salad, main, drinks, dessert, menu;
     RecyclerView rcview_home;
     List<User> dataPopular = new ArrayList<>();
-    LottieAnimationView lottie;
     EditText editText;
-    List<ResModel> data;
+    Button addRecipeButton; // Button for adding new recipe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        // Find views
+        // Initialize views
         salad = findViewById(R.id.salad);
         main = findViewById(R.id.MainDish);
         drinks = findViewById(R.id.Drinks);
         dessert = findViewById(R.id.Desserts);
         rcview_home = findViewById(R.id.rcview_popular);
-        lottie = findViewById(R.id.lottie);
         editText = findViewById(R.id.editText);
         menu = findViewById(R.id.imageView);
+        addRecipeButton = findViewById(R.id.add_recipe_button); // Initialize the add recipe button
 
-        // Set layout to recyclerView
+        // Set layout for recyclerView
         rcview_home.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-
-        // Set Popular recipes
+        // Set popular recipes
         setPopularList();
 
-        // Category buttons- start new activity with intent method "start"
+        // Set onClick listeners
+        setOnClickListeners();
+    }
+
+    private void setOnClickListeners() {
+        // Category buttons - start new activity with intent method "start"
         salad.setOnClickListener(v -> start("Salad", "Salad"));
         main.setOnClickListener(v -> start("Dish", "Main dish"));
         drinks.setOnClickListener(v -> start("Drinks", "Drinks"));
         dessert.setOnClickListener(v -> start("Desserts", "Dessert"));
 
         // Open search activity
-        editText.setOnClickListener(v -> {
-            Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
-            startActivity(intent);
+        editText.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, SearchActivity.class)));
 
-        });
-
-
-
+        // Open add recipe activity
+        addRecipeButton.setOnClickListener(v -> startActivity(new Intent(HomeActivity.this, AddRecipeActivity.class)));
     }
 
-
-    public void setPopularList() {
-
+    private void setPopularList() {
         // Get database
         AppDatabase db = Room.databaseBuilder(getApplicationContext(),
                         AppDatabase.class, "db_name").allowMainThreadQueries()
@@ -89,30 +71,23 @@ public class HomeActivity extends AppCompatActivity {
                 .build();
         UserDao userDao = db.userDao();
 
-        // Get all recipes from database
+        // Get all recipes from database and filter for the "Popular" category
         List<User> recipes = userDao.getAll();
-
-        // Filter Popular category from all recipes
-        for (int i = 0; i < recipes.size(); i++) {
-            if (recipes.get(i).getCategory().contains("Popular")) {
-                dataPopular.add(recipes.get(i));
+        for (User recipe : recipes) {
+            if (recipe.getCategory().contains("Popular")) {
+                dataPopular.add(recipe);
             }
         }
 
         // Set popular list to adapter
         AdapterPopular adapter = new AdapterPopular(dataPopular, getApplicationContext());
         rcview_home.setAdapter(adapter);
-
-        // Hide progress animation
-        lottie.setVisibility(View.GONE);
-
     }
 
-    // Start MainActivity(Recipe list) with intent message
-    public void start(String p, String tittle) {
+    private void start(String category, String title) {
         Intent intent = new Intent(HomeActivity.this, MainActivity.class);
-        intent.putExtra("Category", p);
-        intent.putExtra("tittle", tittle);
+        intent.putExtra("Category", category);
+        intent.putExtra("title", title);
         startActivity(intent);
     }
 }

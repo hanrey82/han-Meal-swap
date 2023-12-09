@@ -1,24 +1,20 @@
 package com.tiodev.MealSwap;
 
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
-
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.tiodev.MealSwap.Adapter.Adaptar;
+import com.tiodev.MealSwap.Adapter.RecipeAdaptar;
 import com.tiodev.MealSwap.Model.ResModel;
 import com.tiodev.MealSwap.RoomDB.AppDatabase;
 import com.tiodev.MealSwap.RoomDB.User;
 import com.tiodev.MealSwap.RoomDB.UserDao;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         // Find views
         back = findViewById(R.id.imageView2);
         tittle = findViewById(R.id.tittle);
-        recview = (RecyclerView)findViewById(R.id.recview);
+        recview = findViewById(R.id.recview);
 
         // Set layout manager to recyclerView
         recview.setLayoutManager(new LinearLayoutManager(this));
@@ -56,20 +52,17 @@ public class MainActivity extends AppCompatActivity {
         List<User> recipes = userDao.getAll();
 
         // Filter category from recipes
-        for(int i = 0; i<recipes.size(); i++){
-            if(recipes.get(i).getCategory().contains(getIntent().getStringExtra("Category"))){
+        for (int i = 0; i < recipes.size(); i++) {
+            if (recipes.get(i).getCategory().contains(Objects.requireNonNull(getIntent().getStringExtra("Category")))) {
                 dataFinal.add(recipes.get(i));
             }
         }
 
         // Set category list to adapter
-        Adaptar adapter = new Adaptar(dataFinal, getApplicationContext());
+        RecipeAdaptar adapter = new RecipeAdaptar(dataFinal, getApplicationContext());
         recview.setAdapter(adapter);
 
         back.setOnClickListener(v -> finish());
-
-
     }
-
 }
 

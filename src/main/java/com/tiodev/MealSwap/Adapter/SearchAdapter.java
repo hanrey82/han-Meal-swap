@@ -43,11 +43,11 @@ public class SearchAdapter extends  RecyclerView.Adapter<SearchAdapter.Searchvie
         final User temp = data.get(position);
 
         Glide.with(holder.img.getContext()).load(data.get(position).getImg()).into(holder.img);
-        holder.txt.setText(data.get(position).getTitle());
+        holder.txt.setText(data.get(position).getTittle());
         holder.item.setOnClickListener(v ->{
             Intent intent = new Intent(context, RecipeActivity.class);
             intent.putExtra("img", temp.getImg());
-            intent.putExtra("tittle", temp.getTitle());
+            intent.putExtra("tittle", temp.getTittle());
             intent.putExtra("des", temp.getDes());
             intent.putExtra("ing", temp.getIng());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

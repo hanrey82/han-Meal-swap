@@ -46,12 +46,12 @@ public class AdapterPopular extends RecyclerView.Adapter<AdapterPopular.myviewho
         // Load image from link
         Glide.with(holder.txt2.getContext()).load(data.get(holder.getAdapterPosition()).getImg()).into(holder.img);
         // Set title
-        holder.txt.setText(data.get(holder.getAdapterPosition()).getTitle());
+        holder.txt.setText(data.get(holder.getAdapterPosition()).getTittle());
 
         holder.img.setOnClickListener(v ->{
             Intent intent = new Intent(context, RecipeActivity.class);
             intent.putExtra("img", temp.getImg());
-            intent.putExtra("title", temp.getTitle());
+            intent.putExtra("tittle", temp.getTittle());
             intent.putExtra("des", temp.getDes());
             intent.putExtra("ing", temp.getIng());
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

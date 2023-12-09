@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange_200"
     tools:context=".HomeActivity">
+
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@drawable/card_back_btn"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:src="@drawable/menu_home"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="TODO"
+        android:src="@drawable/app_name"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
-
-    <ImageView
-        android:layout_width="190dp"
-        android:layout_height="190dp"
-        android:visibility="gone"
-        android:layout_marginTop="90dp"
-        android:layout_marginEnd="-10dp"
-        android:src="@drawable/home_assest1"
-        android:rotation="-1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="TODO" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
@@ -49,8 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:fontFamily="@font/poppins_semi"
-        android:text="Chef"
-        android:textColor="@color/purple_500"
+        android:text="Chef!"
+        android:textColor="@color/red_200"
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -62,25 +56,39 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_light"
         android:text="What do you want to cook today?"
-        android:textColor="#424242"
+        android:textColor="@color/gray_500"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+    <Button
+        android:id="@+id/add_recipe_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_semi"
+        android:text="Add Recipe"
+        android:textColor="@color/black"
+        android:textSize="19sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rcview_popular" />
+
     <EditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:focusable="false"
         android:layout_marginStart="24dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/searchview"
         android:fontFamily="@font/poppins_light"
-        android:hint="Search recipe"
-        android:paddingStart="47dp"
-        android:textColorHint="#5A5858"
-        android:textSize="17sp"
+        android:hint="Search recipe..."
+        android:paddingStart="53dp"
+        android:textColorHint="@color/gray_500"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
@@ -105,7 +113,7 @@
         android:layout_marginTop="26dp"
         android:fontFamily="@font/poppins_semi"
         android:text="Categories"
-        android:textColor="@color/black"
+        android:textColor="@color/red_200"
         android:textSize="19sp"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/editText" />
@@ -249,10 +257,11 @@
         android:id="@+id/popular_text"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
         android:fontFamily="@font/poppins_semi"
         android:text="Popular recipe"
-        android:textColor="@color/black"
+        android:textColor="@color/red_200"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
@@ -275,8 +284,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/lottie"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/popular_text"
         tools:ignore="RtlSymmetry" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
